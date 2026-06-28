@@ -210,16 +210,19 @@ def merge_prose(selection: list[dict]) -> None:
                     b[f] = old[b["id"]][f]
 
 
-def build_briefing(since_ts: float, focus: list[dict]) -> dict:
+def build_briefing(since_ts: float, focus: list[dict], baseline: dict | None = None) -> dict:
     """Faits déterministes du briefing : pour chaque partie nouvelle, les
-    métriques de motifs comparées au focus. La prose reste vide (LLM)."""
+    métriques de motifs comparées au focus + le vecteur de features complet.
+    La prose reste vide (LLM)."""
     from collections import Counter
+    import features as feat_mod
     games = [json.loads(l) for l in config.GAMES_INDEX.read_text().splitlines() if l.strip()]
     games = [g for g in games if g.get("time_class") == "rapid"]
     all_bl = [json.loads(l) for l in config.BLUNDERS_FILE.read_text().splitlines() if l.strip()]
     by_game = {}
     for b in all_bl:
         by_game.setdefault(b["game_id"], []).append(b)
+    feats = feat_mod.features_by_id()
 
     new_games = sorted((g for g in games if g.get("timestamp", 0) > since_ts),
                        key=lambda g: g.get("timestamp", 0))
@@ -244,19 +247,22 @@ def build_briefing(since_ts: float, focus: list[dict]) -> dict:
             "gaffes": sum(1 for b in errs if b["severity"] == "gaffe"),
             "impulsive_errors": sum(1 for b in errs if b["impulsive"]),
             "focus_check": focus_check,
+            "features": feats.get(g["game_id"]),   # vecteur complet (ACPL, zeitnot...)
         })
 
     today = new_games[-1]["date"] if new_games else None
     return {
         "date": today,
         "n_new_games": len(new_games),
+        "baseline": baseline,            # la "normale" du joueur (base glissante)
         "games": games_facts,
         # --- PROSE (remplie par Claude Code) ---
         "applied": "", "to_work": "", "advice_now": "", "continuity": [],
     }
 
 
-def build_daily(n: int, since_ts: float | None, focus: list[dict]) -> dict:
+def build_daily(n: int, since_ts: float | None, focus: list[dict],
+                baseline: dict | None = None) -> dict:
     """Construit le payload web complet : puzzles en 2 sections + briefing."""
     blunders = [enrich_for_web(b) for b in load_blunders()]
     useful = [b for b in blunders if is_useful(b)]
@@ -289,7 +295,7 @@ def build_daily(n: int, since_ts: float | None, focus: list[dict]) -> dict:
         "generated_for": config.USERNAME,
         "sections": sections,
         "blunders": selection,
-        "briefing": build_briefing(since_ts, focus) if since_ts is not None else None,
+        "briefing": build_briefing(since_ts, focus, baseline) if since_ts is not None else None,
         "needs_prose": [b["id"] for b in selection
                         if not all(b.get(f) for f in ("why_blunder", "why_better"))],
     }

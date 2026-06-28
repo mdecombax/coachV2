@@ -307,6 +307,8 @@ def analyse_game(g: dict, engine, depth: int) -> tuple[dict, list[dict]] | None:
     }
 
     blunders = []
+    total_cp_loss = 0   # somme des pertes (>=0) sur tous TES coups -> ACPL
+    n_user_moves = 0
     board = chess.Board()
     for ply, mv in enumerate(moves):
         is_user_move = (board.turn == user)
@@ -322,6 +324,8 @@ def analyse_game(g: dict, engine, depth: int) -> tuple[dict, list[dict]] | None:
             cp_before = pos_before["cp_white"] if user == chess.WHITE else -pos_before["cp_white"]
             cp_after = pos_after["cp_white"] if user == chess.WHITE else -pos_after["cp_white"]
             cp_loss = cp_before - cp_after
+            n_user_moves += 1
+            total_cp_loss += max(cp_loss, 0)
             sev = severity(cp_loss)
             if sev is not None:
                 # temps passé sur le coup (incrément compris)
@@ -351,6 +355,9 @@ def analyse_game(g: dict, engine, depth: int) -> tuple[dict, list[dict]] | None:
                 })
         board.push(mv)
 
+    meta["n_user_moves"] = n_user_moves
+    meta["total_cp_loss"] = total_cp_loss
+    meta["acpl"] = round(total_cp_loss / n_user_moves, 1) if n_user_moves else None
     return meta, blunders
 
 

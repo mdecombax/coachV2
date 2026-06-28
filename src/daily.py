@@ -38,15 +38,20 @@ def main():
     print("\n=== 2/4 Analyse Stockfish (incrémentale) ===")
     _run("analyze.py", "--depth", str(args.depth))
 
-    # mémoire (bootstrap au premier run)
+    # mémoire : bootstrap au 1er run, sinon refresh de la base GLISSANTE
     state = coach_state.load()
     if not state.get("focus"):
         print("\n(premier run : initialisation de la mémoire de coaching)")
         state = coach_state.bootstrap()
+    else:
+        print("\n(rafraîchissement de la base de référence glissante)")
+        state = coach_state.refresh(state)
+    coach_state.save(state)
     since = state["last_game_end"]
 
     print("\n=== 3/4 Sélection des puzzles (2 sections) + briefing ===")
-    payload = select_review.build_daily(args.n, since_ts=since, focus=state["focus"])
+    payload = select_review.build_daily(args.n, since_ts=since, focus=state["focus"],
+                                        baseline=state.get("baseline"))
     select_review.write_payload(payload)
 
     print("\n=== 4/4 Résumé ===")

@@ -13,6 +13,7 @@ import datetime as dt
 from collections import Counter, defaultdict
 
 import config
+import features
 
 STATE_FILE = config.DATA_DIR / "coaching_state.json"
 
@@ -76,12 +77,11 @@ def save(state):
     STATE_FILE.write_text(json.dumps(state, ensure_ascii=False, indent=2))
 
 
-def compute_focus(n_recent=50, top=3):
-    """Dérive les focus prioritaires des données récentes."""
-    games, blunders = load_games_and_blunders()
-    rates, _ = motif_rates(games, blunders, n_recent)
+def focus_from_baseline(baseline, top=3):
+    """Top motifs travaillables, taux tirés de la base glissante."""
+    rates = baseline.get("motif_rates", {})
     ranked = sorted(
-        ((m, r) for m, r in rates.items() if m in FOCUS_MOTIFS and r > 0),
+        ((m, r) for m, r in rates.items() if m in FOCUS_MOTIFS and r and r > 0),
         key=lambda x: -x[1],
     )[:top]
     return [
@@ -90,20 +90,38 @@ def compute_focus(n_recent=50, top=3):
     ]
 
 
-def bootstrap():
+def refresh(state, n_recent=50):
+    """Recalcule la base de référence GLISSANTE + rafraîchit le focus.
+    Préserve last_game_end, history, et les statuts de focus posés par le LLM."""
+    rows = features.build()
+    baseline = features.rolling_baseline(rows, n_recent)
+    state["baseline"] = baseline
+
+    old = {f["motif"]: f for f in state.get("focus", [])}
+    new_focus = focus_from_baseline(baseline)
+    for f in new_focus:  # garde le statut rédigé si le motif était déjà suivi
+        if f["motif"] in old:
+            f["status"] = old[f["motif"]].get("status", "actif")
+    state["focus"] = new_focus
+    return state
+
+
+def bootstrap(n_recent=50):
     """Crée l'état initial. last_game_end est calé pour que les parties du
     DERNIER jour joué comptent comme 'nouvelles' au premier run."""
-    games, _ = load_games_and_blunders()
-    if not games:
+    rows = features.build()
+    rapid = sorted((r for r in rows if r["time_class"] == "rapid"),
+                   key=lambda r: r["timestamp"])
+    if not rapid:
         save(default_state())
         return load()
-    last_date = games[-1]["date"]
-    # dernière partie d'AVANT le dernier jour -> les parties du dernier jour sont neuves
-    prior = [g for g in games if g["date"] < last_date]
-    last_game_end = prior[-1]["timestamp"] if prior else 0
+    last_date = rapid[-1]["date"]
+    prior = [r for r in rapid if r["date"] < last_date]
+    baseline = features.rolling_baseline(rows, n_recent)
     state = {
-        "last_game_end": last_game_end,
-        "focus": compute_focus(),
+        "last_game_end": prior[-1]["timestamp"] if prior else 0,
+        "baseline": baseline,
+        "focus": focus_from_baseline(baseline),
         "history": [],
     }
     save(state)
@@ -113,9 +131,7 @@ def bootstrap():
 if __name__ == "__main__":
     st = bootstrap()
     print(f"État initialisé -> {STATE_FILE}")
-    print(f"last_game_end : {st['last_game_end']} "
-          f"({dt.datetime.fromtimestamp(st['last_game_end'], dt.UTC):%Y-%m-%d %H:%M} UTC)"
-          if st["last_game_end"] else "last_game_end : 0")
+    print("Base de référence :", json.dumps(st["baseline"], ensure_ascii=False))
     print("Focus :")
     for f in st["focus"]:
-        print(f"  - {f['motif']:14} ref={f['ref_rate']:.2f}/partie  «{f['label']}»")
+        print(f"  - {f['motif']:14} ref={f['ref_rate']}/partie  «{f['label']}»")
