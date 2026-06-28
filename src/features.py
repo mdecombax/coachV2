@@ -11,7 +11,9 @@ chaque run (fenêtre glissante) pour suivre le niveau réel.
 Aucun moteur : on lit le cache d'analyse + les horloges du PGN.
 """
 import io
+import re
 import json
+import datetime as dt
 from collections import Counter
 
 import chess.pgn
@@ -98,6 +100,29 @@ def compute_game_features(meta: dict, blunders: list, raw: dict | None) -> dict:
     feat["zeitnot_moves"] = zeitnot
     feat["final_clock_s"] = final_clock
     feat["lost_on_time"] = lost_on_time
+
+    # --- contexte (gratuit, pour stats rétrospectives) ---
+    feat["rating_diff"] = (meta["my_rating"] - meta["opp_rating"]) \
+        if meta.get("opp_rating") else None
+    ts = meta.get("timestamp") or 0
+    if ts:
+        d = dt.datetime.fromtimestamp(ts, dt.UTC)
+        feat["hour_utc"] = d.hour
+        feat["weekday"] = d.weekday()        # 0 = lundi
+    else:
+        feat["hour_utc"] = feat["weekday"] = None
+
+    if raw:
+        side = "white" if meta["my_color"] == "blanc" else "black"
+        other = "black" if side == "white" else "white"
+        feat["my_result_code"] = raw.get(side, {}).get("result")
+        feat["opp_result_code"] = raw.get(other, {}).get("result")
+        feat["rated"] = raw.get("rated")
+        feat["cc_accuracy"] = (raw.get("accuracies") or {}).get(side)
+        m = re.search(r'\[ECO "([^"]*)"\]', raw.get("pgn", ""))
+        feat["eco_code"] = m.group(1) if m else None
+        eco_url = raw.get("eco") or ""
+        feat["opening"] = eco_url.split("/openings/")[-1] if "/openings/" in eco_url else None
     return feat
 
 
