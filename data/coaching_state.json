@@ -1,0 +1,40 @@
+{
+  "last_game_end": 1782620387,
+  "focus": [
+    {
+      "motif": "mat_rate",
+      "label": "Finir les attaques (voir les mats)",
+      "ref_rate": 0.28,
+      "status": "actif — priorité du jour"
+    },
+    {
+      "motif": "piece_pendue",
+      "label": "Ne pas pendre de pièces",
+      "ref_rate": 1.68,
+      "status": "actif (respecté aujourd'hui)"
+    },
+    {
+      "motif": "mat_permis",
+      "label": "Protéger ton roi (ne pas permettre de mat)",
+      "ref_rate": 0.66,
+      "status": "actif (respecté aujourd'hui)"
+    }
+  ],
+  "history": [
+    {
+      "date": "2026-06-28",
+      "games": [
+        "2aec37df-72a5-11f1-bbe2-859d0501000f"
+      ],
+      "result": "victoire",
+      "applied": [
+        "piece_pendue",
+        "mat_permis"
+      ],
+      "to_work": [
+        "mat_rate"
+      ],
+      "advice": "Chercher l'échec qui mate avant de jouer un coup d'attaque."
+    }
+  ]
+}

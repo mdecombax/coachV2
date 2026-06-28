@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Coach — Révision des blunders</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <h1>♟️ Coach — <span id="pseudo">mdecombax</span></h1>
+    <div id="nav">
+      <button id="prev">←</button>
+      <span id="counter">–/–</span>
+      <button id="next">→</button>
+    </div>
+  </header>
+
+  <section id="briefing" class="hidden">
+    <h2>📋 Briefing du jour <span id="briefing-date"></span></h2>
+    <div id="briefing-cards">
+      <div class="bcard ok"><h3>✅ Bien appliqué</h3><p id="t-applied"></p></div>
+      <div class="bcard no"><h3>❌ À travailler</h3><p id="t-towork"></p></div>
+      <div class="bcard advice"><h3>🎯 À appliquer maintenant</h3><p id="t-advice"></p></div>
+    </div>
+    <div id="b-continuity"></div>
+  </section>
+
+  <div id="tabs"></div>
+
+  <main>
+    <section id="board-col">
+      <div class="clock" id="clk-opp"></div>
+      <div id="board-wrap">
+        <div id="board"></div>
+        <svg id="arrows" viewBox="0 0 8 8" preserveAspectRatio="none"></svg>
+        <div id="mate-banner" class="hidden">♚ Échec et mat</div>
+      </div>
+      <div class="clock" id="clk-me"></div>
+      <div id="board-info">
+        <span id="to-move"></span>
+        <span id="explore-feedback"></span>
+      </div>
+      <div id="actions">
+        <button id="reset">↺ Replacer</button>
+        <button id="reveal" class="primary">Révéler la solution</button>
+      </div>
+      <div id="line-controls" class="hidden">
+        <button id="line-back">◀</button>
+        <span id="line-pos">Position de départ</span>
+        <button id="line-fwd">▶</button>
+      </div>
+      <p class="hint" id="hint">À toi de jouer : trouve le meilleur coup en déplaçant une pièce. Puis « Révéler ».</p>
+    </section>
+
+    <section id="panel">
+      <div id="meta-tags"></div>
+
+      <div class="card" id="card-played">
+        <h3>Ce que tu as joué</h3>
+        <p id="played-line"></p>
+        <p id="time-line" class="muted"></p>
+      </div>
+
+      <div class="card hidden" id="card-why">
+        <h3>Pourquoi c'est un blunder</h3>
+        <p id="why-blunder"></p>
+      </div>
+
+      <div class="card hidden" id="card-punish">
+        <h3>⚠️ Comment l'adversaire prenait la pièce</h3>
+        <p id="punish-line"></p>
+        <button id="punish-play">▶ Rejouer la punition sur l'échiquier</button>
+      </div>
+
+      <div class="card hidden" id="card-better">
+        <h3>Le meilleur coup <span id="best-badge"></span></h3>
+        <p id="best-line"></p>
+        <p id="why-better"></p>
+      </div>
+
+      <div class="card hidden" id="card-tip">
+        <h3>💡 À retenir</h3>
+        <p id="coach-tip"></p>
+      </div>
+
+      <p id="game-link" class="muted"></p>
+    </section>
+  </main>
+
+  <script type="module" src="app.js"></script>
+</body>
+</html>

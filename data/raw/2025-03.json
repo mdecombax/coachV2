@@ -1,0 +1,32 @@
+{
+"games": [
+{
+"url": "https://www.chess.com/game/live/136472291950",
+"pgn": "[Event \"Live Chess\"]\n[Site \"Chess.com\"]\n[Date \"2025.03.20\"]\n[Round \"-\"]\n[White \"momo_1845\"]\n[Black \"mdecombax\"]\n[Result \"1-0\"]\n[CurrentPosition \"4Q1k1/ppp2ppp/3p4/6n1/8/8/PPP2q2/2KR4 b - -\"]\n[Timezone \"UTC\"]\n[ECO \"C42\"]\n[ECOUrl \"https://www.chess.com/openings/Petrovs-Defense-Three-Knights-Game\"]\n[UTCDate \"2025.03.20\"]\n[UTCTime \"12:08:28\"]\n[WhiteElo \"243\"]\n[BlackElo \"219\"]\n[TimeControl \"600\"]\n[Termination \"momo_1845 won by checkmate\"]\n[StartTime \"12:08:28\"]\n[EndDate \"2025.03.20\"]\n[EndTime \"12:19:35\"]\n[Link \"https://www.chess.com/game/live/136472291950\"]\n\n1. e4 {[%clk 0:09:55.7]} 1... e5 {[%clk 0:09:58.2]} 2. Nc3 {[%clk 0:09:50.9]} 2... Nf6 {[%clk 0:09:53.5]} 3. Nf3 {[%clk 0:09:44.6]} 3... Bd6 {[%clk 0:09:49.8]} 4. d4 {[%clk 0:09:39.9]} 4... Nc6 {[%clk 0:09:05.9]} 5. dxe5 {[%clk 0:09:33.2]} 5... Bxe5 {[%clk 0:09:02.7]} 6. Nxe5 {[%clk 0:09:27.9]} 6... Nxe5 {[%clk 0:08:56.9]} 7. Bf4 {[%clk 0:09:26.8]} 7... d6 {[%clk 0:08:48.1]} 8. Nb5 {[%clk 0:09:24.6]} 8... O-O {[%clk 0:08:42.8]} 9. Nd4 {[%clk 0:08:51.4]} 9... Nxe4 {[%clk 0:08:26.8]} 10. Nf5 {[%clk 0:08:45.6]} 10... Bxf5 {[%clk 0:08:12]} 11. Bg5 {[%clk 0:08:44]} 11... Qxg5 {[%clk 0:08:03.6]} 12. Bb5 {[%clk 0:08:34.1]} 12... Qxg2 {[%clk 0:07:16.3]} 13. Rf1 {[%clk 0:08:23.3]} 13... Qxh2 {[%clk 0:07:08.1]} 14. Qe2 {[%clk 0:08:08.9]} 14... Rfe8 {[%clk 0:06:14.3]} 15. O-O-O {[%clk 0:07:56.7]} 15... Re6 {[%clk 0:05:41.3]} 16. Bd7 {[%clk 0:07:22.5]} 16... Re7 {[%clk 0:05:20.8]} 17. Bxf5 {[%clk 0:07:17.3]} 17... Ng5 {[%clk 0:04:49.9]} 18. Qb5 {[%clk 0:07:02.6]} 18... Rae8 {[%clk 0:04:29.8]} 19. Bd7 {[%clk 0:06:55.6]} 19... Nxd7 {[%clk 0:04:05.9]} 20. Rd2 {[%clk 0:06:48.4]} 20... Re1+ {[%clk 0:03:46.6]} 21. Rxe1 {[%clk 0:06:45.9]} 21... Rxe1+ {[%clk 0:03:45.4]} 22. Rd1 {[%clk 0:06:42.2]} 22... Re5 {[%clk 0:03:28.4]} 23. Qxd7 {[%clk 0:06:37.2]} 23... Qxf2 {[%clk 0:02:58]} 24. Qd8+ {[%clk 0:06:34.2]} 24... Re8 {[%clk 0:02:34]} 25. Qxe8# {[%clk 0:06:32]} 1-0\n",
+"time_control": "600",
+"end_time": 1742473175,
+"rated": true,
+"tcn": "mC0Kbs!Tgv9RlB5QBKRKvKQKcDZRsH8!HBTCBL6LDM7MfHMohfopdm98ec8SHZS0ZLCMmH48LZKZdl0efe8eldeKHZpnZ7K878",
+"uuid": "087654cf-0584-11f0-9bc4-32a76701000f",
+"initial_setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+"fen": "4Q1k1/ppp2ppp/3p4/6n1/8/8/PPP2q2/2KR4 b - -",
+"time_class": "rapid",
+"rules": "chess",
+"white": {
+"rating": 243,
+"result": "win",
+"@id": "https://api.chess.com/pub/player/momo_1845",
+"username": "momo_1845",
+"uuid": "9e20636e-9c07-11ed-92d9-c3d67d5db35f"
+},
+"black": {
+"rating": 219,
+"result": "checkmated",
+"@id": "https://api.chess.com/pub/player/mdecombax",
+"username": "mdecombax",
+"uuid": "09ebaf8a-03be-11ef-a571-eba4146e6086"
+},
+"eco": "https://www.chess.com/openings/Petrovs-Defense-Three-Knights-Game"
+}
+]
+}

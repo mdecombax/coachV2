@@ -1,0 +1,306 @@
+:root {
+  --light: #ebecd0;
+  --dark: #739552;
+  --board: 520px;
+  --played: #d33a3a;   /* rouge : coup joué */
+  --best: #3a9d4a;     /* vert : meilleur coup */
+  --hl: rgba(255, 214, 71, 0.55);
+  --bg: #2b2b29;
+  --card: #ffffff;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  background: var(--bg);
+  color: #eee;
+}
+
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 22px;
+  background: #1f1f1d;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+header h1 { font-size: 18px; margin: 0; font-weight: 600; }
+#nav { display: flex; align-items: center; gap: 10px; }
+#counter { font-variant-numeric: tabular-nums; min-width: 56px; text-align: center; }
+
+button {
+  background: #3a3a37;
+  color: #eee;
+  border: none;
+  padding: 9px 14px;
+  border-radius: 8px;
+  font-size: 14px;
+  cursor: pointer;
+}
+button:hover { background: #4a4a46; }
+button.primary { background: var(--best); color: #fff; font-weight: 600; }
+button.primary:hover { filter: brightness(1.08); }
+
+/* ---- Briefing du jour ---- */
+#briefing {
+  margin: 18px 24px 0;
+  padding: 18px 20px;
+  background: #232320;
+  border-radius: 14px;
+  border: 1px solid #34342f;
+}
+#briefing h2 { margin: 0 0 14px; font-size: 18px; }
+#briefing-date { color: #999; font-weight: 400; font-size: 14px; }
+#briefing-cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+.bcard { background: #2c2c28; border-radius: 10px; padding: 12px 14px; }
+.bcard h3 { margin: 0 0 6px; font-size: 14px; }
+.bcard p { margin: 0; font-size: 13.5px; line-height: 1.5; color: #ddd; }
+.bcard.ok { border-left: 4px solid #3a9d4a; }
+.bcard.no { border-left: 4px solid #d33a3a; }
+.bcard.advice { border-left: 4px solid #e8911e; }
+#b-continuity { margin-top: 12px; }
+.cont-game {
+  background: #2c2c28;
+  border-radius: 10px;
+  padding: 12px 14px;
+  font-size: 13.5px;
+  line-height: 1.55;
+}
+.cont-game .head { font-weight: 600; margin-bottom: 4px; }
+.cont-game .chk { color: #ccc; }
+.cont-game .chk b.ok { color: #7ddc8b; }
+.cont-game .chk b.no { color: #ff9a9a; }
+
+/* ---- Onglets de sections ---- */
+#tabs {
+  display: flex;
+  gap: 8px;
+  margin: 16px 24px 0;
+}
+.tab {
+  background: #2c2c28;
+  border: 1px solid #34342f;
+  color: #ccc;
+  padding: 8px 16px;
+  border-radius: 999px;
+  cursor: pointer;
+  font-size: 14px;
+}
+.tab.active { background: var(--dark); color: #fff; border-color: var(--dark); }
+.tab .badge {
+  background: rgba(255, 255, 255, 0.18);
+  padding: 1px 8px;
+  border-radius: 999px;
+  margin-left: 6px;
+  font-size: 12px;
+}
+
+main {
+  display: flex;
+  gap: 28px;
+  padding: 24px;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+/* ---- Échiquier ---- */
+#board-col { width: var(--board); max-width: 92vw; }
+#board-wrap {
+  position: relative;
+  width: var(--board);
+  height: var(--board);
+  max-width: 92vw;
+  aspect-ratio: 1 / 1;
+}
+#board {
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  grid-template-rows: repeat(8, 1fr);
+  width: 100%;
+  height: 100%;
+  border-radius: 6px;
+  overflow: hidden;
+  user-select: none;
+}
+.sq {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.sq.light { background: var(--light); }
+.sq.dark { background: var(--dark); }
+.sq.sel::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--hl);
+}
+.sq.target::before {
+  content: "";
+  position: absolute;
+  width: 30%;
+  height: 30%;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.22);
+}
+.sq img {
+  width: 88%;
+  height: 88%;
+  cursor: grab;
+  position: relative;
+  z-index: 2;
+}
+.coord {
+  position: absolute;
+  font-size: 11px;
+  font-weight: 700;
+  opacity: 0.6;
+}
+.coord.file { right: 3px; bottom: 1px; }
+.coord.rank { left: 3px; top: 1px; }
+
+#arrows {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 3;
+}
+
+/* surbrillance du roi : échec (orange) / mat (rouge) */
+.sq.check { box-shadow: inset 0 0 0 5px rgba(232, 145, 30, 0.9); }
+.sq.mate {
+  box-shadow: inset 0 0 0 5px rgba(214, 40, 40, 1);
+  background-image: radial-gradient(circle, rgba(214, 40, 40, 0.55), rgba(214, 40, 40, 0.15));
+}
+
+#mate-banner {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(180, 28, 28, 0.94);
+  color: #fff;
+  padding: 14px 28px;
+  border-radius: 14px;
+  font-size: 26px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  z-index: 6;
+  pointer-events: none;
+  box-shadow: 0 8px 34px rgba(0, 0, 0, 0.55);
+  animation: pop 0.18s ease-out;
+}
+@keyframes pop {
+  from { transform: translate(-50%, -50%) scale(0.7); opacity: 0; }
+  to { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+}
+
+/* horloges façon chess.com : adversaire au-dessus, toi en dessous */
+.clock {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+  font-size: 15px;
+  font-variant-numeric: tabular-nums;
+  color: #cfcfcf;
+}
+#clk-opp { margin-bottom: 8px; }
+#clk-me { margin-top: 8px; }
+.clock .time {
+  min-width: 92px;
+  text-align: center;
+  padding: 6px 12px;
+  border-radius: 8px;
+  background: #3a3a37;
+  font-size: 20px;
+  font-weight: 700;
+  color: #fff;
+}
+.clock.low .time { background: #6b2020; color: #ff9a9a; }  /* < 1 min : zeitnot */
+.clock.turn .time { outline: 2px solid #7ddc8b; }          /* au trait */
+
+#board-info {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+  min-height: 22px;
+  font-size: 14px;
+}
+#explore-feedback.ok { color: #7ddc8b; font-weight: 600; }
+#explore-feedback.no { color: #e88; }
+
+#actions { display: flex; gap: 10px; margin-top: 12px; }
+#actions button { flex: 1; }
+.hint { font-size: 12.5px; color: #999; margin-top: 10px; }
+
+#line-controls {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 12px;
+}
+#line-controls button { width: 52px; font-size: 16px; }
+#line-pos {
+  flex: 1;
+  text-align: center;
+  font-size: 14px;
+  font-variant-numeric: tabular-nums;
+  color: #ddd;
+}
+#line-pos b { color: #7ddc8b; }
+
+/* ---- Panneau stats ---- */
+#panel { width: 380px; max-width: 92vw; }
+#meta-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 14px; }
+.tag {
+  font-size: 12px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: #3a3a37;
+}
+.tag.motif { background: #5a4abf; }
+.tag.gaffe { background: #b33; }
+.tag.erreur { background: #b80; }
+
+.card {
+  background: var(--card);
+  color: #222;
+  border-radius: 12px;
+  padding: 14px 16px;
+  margin-bottom: 12px;
+}
+.card h3 { margin: 0 0 8px; font-size: 15px; }
+.card p { margin: 6px 0; font-size: 14px; line-height: 1.5; }
+.card .muted { color: #777; font-size: 13px; }
+.card button {
+  margin-top: 6px;
+  background: #d33a3a;
+  color: #fff;
+  font-weight: 600;
+}
+.card button:hover { filter: brightness(1.08); }
+#card-punish { border-left: 4px solid var(--played); }
+.muted { color: #aaa; font-size: 13px; }
+.hidden { display: none !important; }
+#best-badge {
+  font-family: ui-monospace, monospace;
+  background: var(--best);
+  color: #fff;
+  padding: 2px 8px;
+  border-radius: 6px;
+  font-size: 13px;
+}
+#game-link a { color: #9cc; }
+.pending { font-style: italic; color: #999; }

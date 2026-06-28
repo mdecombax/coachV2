@@ -1,0 +1,36 @@
+{
+"games": [
+{
+"url": "https://www.chess.com/game/live/142605615163",
+"pgn": "[Event \"Live Chess\"]\n[Site \"Chess.com\"]\n[Date \"2025.05.26\"]\n[Round \"-\"]\n[White \"okawashido\"]\n[Black \"mdecombax\"]\n[Result \"1/2-1/2\"]\n[CurrentPosition \"6b1/8/5p2/8/4n1k1/r7/7K/2q2q2 w - - 2 52\"]\n[Timezone \"UTC\"]\n[ECO \"A46\"]\n[ECOUrl \"https://www.chess.com/openings/Indian-Game-Knights-Variation-2...e6-3.g3-d5\"]\n[UTCDate \"2025.05.26\"]\n[UTCTime \"20:39:43\"]\n[WhiteElo \"526\"]\n[BlackElo \"230\"]\n[TimeControl \"600\"]\n[Termination \"Game drawn by stalemate\"]\n[StartTime \"20:39:43\"]\n[EndDate \"2025.05.26\"]\n[EndTime \"20:57:48\"]\n[Link \"https://www.chess.com/game/live/142605615163\"]\n\n1. d4 {[%clk 0:10:00]} 1... d5 {[%clk 0:10:00]} 2. Nf3 {[%clk 0:09:54.2]} 2... Nf6 {[%clk 0:09:52.8]} 3. g3 {[%clk 0:09:48.4]} 3... e6 {[%clk 0:09:49.8]} 4. b4 {[%clk 0:09:39.3]} 4... Bxb4+ {[%clk 0:09:43]} 5. c3 {[%clk 0:09:29]} 5... Ba5 {[%clk 0:09:34]} 6. Qa4+ {[%clk 0:09:14]} 6... Nc6 {[%clk 0:09:22.4]} 7. Ne5 {[%clk 0:08:41.9]} 7... Qd6 {[%clk 0:09:05.7]} 8. Nxc6 {[%clk 0:08:14.5]} 8... bxc6 {[%clk 0:08:45.6]} 9. Qxa5 {[%clk 0:08:11.6]} 9... O-O {[%clk 0:08:22.1]} 10. e3 {[%clk 0:08:02.4]} 10... Ne4 {[%clk 0:07:52.7]} 11. Bd3 {[%clk 0:07:49.7]} 11... h6 {[%clk 0:07:14.2]} 12. f3 {[%clk 0:07:48.1]} 12... Nc5 {[%clk 0:06:55.7]} 13. Bc2 {[%clk 0:07:30.8]} 13... Nb7 {[%clk 0:06:49.7]} 14. Qa4 {[%clk 0:07:09.1]} 14... e5 {[%clk 0:06:38.3]} 15. g4 {[%clk 0:07:07]} 15... Be6 {[%clk 0:06:05.2]} 16. e4 {[%clk 0:07:03.2]} 16... Rae8 {[%clk 0:05:58.6]} 17. Nd2 {[%clk 0:06:42.6]} 17... exd4 {[%clk 0:05:39.9]} 18. cxd4 {[%clk 0:06:36.6]} 18... c5 {[%clk 0:04:54.4]} 19. dxc5 {[%clk 0:06:17.7]} 19... Nxc5 {[%clk 0:04:51.3]} 20. Qxa7 {[%clk 0:06:14.4]} 20... dxe4 {[%clk 0:04:34.7]} 21. Nc4 {[%clk 0:06:08]} 21... Bxc4 {[%clk 0:04:29.5]} 22. a3 {[%clk 0:05:41.6]} 22... exf3+ {[%clk 0:04:23.6]} 23. Kf2 {[%clk 0:04:43.4]} 23... Bd5 {[%clk 0:03:51.6]} 24. Rb1 {[%clk 0:04:33.9]} 24... Re2+ {[%clk 0:03:43.3]} 25. Kf1 {[%clk 0:04:17]} 25... Rxc2 {[%clk 0:03:41]} 26. Be3 {[%clk 0:03:59]} 26... Ba2 {[%clk 0:03:05.4]} 27. Rb8 {[%clk 0:03:43.7]} 27... c6 {[%clk 0:02:45.1]} 28. Rxf8+ {[%clk 0:03:32.4]} 28... Kxf8 {[%clk 0:02:43.7]} 29. Qa8+ {[%clk 0:03:26]} 29... Ke7 {[%clk 0:02:34.2]} 30. g5 {[%clk 0:03:19.5]} 30... hxg5 {[%clk 0:02:29]} 31. Bxg5+ {[%clk 0:03:17.8]} 31... f6 {[%clk 0:02:24.3]} 32. Bh4 {[%clk 0:03:12.3]} 32... g5 {[%clk 0:02:14.7]} 33. Bg3 {[%clk 0:02:53.5]} 33... Ne4 {[%clk 0:02:10.5]} 34. Bxd6+ {[%clk 0:02:52.2]} 34... Kxd6 {[%clk 0:02:08.3]} 35. Qd8+ {[%clk 0:02:50.4]} 35... Ke6 {[%clk 0:01:54]} 36. Qg8+ {[%clk 0:02:47.9]} 36... Kf5 {[%clk 0:01:44.7]} 37. a4 {[%clk 0:02:43.5]} 37... Bxg8 {[%clk 0:01:42.7]} 38. a5 {[%clk 0:02:41.2]} 38... Ra2 {[%clk 0:01:38.6]} 39. a6 {[%clk 0:02:32.1]} 39... Rxa6 {[%clk 0:01:37.6]} 40. h3 {[%clk 0:02:30.5]} 40... g4 {[%clk 0:01:35.7]} 41. hxg4+ {[%clk 0:02:29]} 41... Kxg4 {[%clk 0:01:34.8]} 42. Rh8 {[%clk 0:02:27.7]} 42... Bc4+ {[%clk 0:01:30.5]} 43. Kg1 {[%clk 0:02:22.2]} 43... c5 {[%clk 0:01:29.9]} 44. Rg8+ {[%clk 0:02:11.7]} 44... Bxg8 {[%clk 0:01:27.6]} 45. Kh2 {[%clk 0:02:07.9]} 45... c4 {[%clk 0:01:25.2]} 46. Kg1 {[%clk 0:02:06.5]} 46... c3 {[%clk 0:01:24.7]} 47. Kh2 {[%clk 0:02:05.5]} 47... c2 {[%clk 0:01:24.2]} 48. Kg1 {[%clk 0:02:04.3]} 48... c1=Q+ {[%clk 0:01:23.2]} 49. Kh2 {[%clk 0:02:02.7]} 49... f2 {[%clk 0:01:20.1]} 50. Kg2 {[%clk 0:02:00.4]} 50... f1=Q+ {[%clk 0:01:17.7]} 51. Kh2 {[%clk 0:01:55.4]} 51... Ra3 {[%clk 0:01:14.5]} 1/2-1/2\n",
+"time_control": "600",
+"end_time": 1748293068,
+"rated": true,
+"accuracies": {
+"white": 72.9,
+"black": 72.92
+},
+"tcn": "lBZJgv!Tow0Sjz9zkszGdy5QvK7RKQXQyG8!muTCft3VnvCItkIXGySKwE6SuC48blKBsBQIBIXIyWJClASAiqCvenAJab8mnfmkcuJib5YQ59!9W490EMVMuM1TMF2MFwICwR0R47RS7!SLqyi!yGkiGOiOpxMExELEh?!AfgQI?!A!gpIApgAsgpskpgk~gpvnpon~opOq",
+"uuid": "8e2e4e07-3a71-11f0-a62a-6cfe544c0428",
+"initial_setup": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+"fen": "6b1/8/5p2/8/4n1k1/r7/7K/2q2q2 w - - 2 52",
+"time_class": "rapid",
+"rules": "chess",
+"white": {
+"rating": 526,
+"result": "stalemate",
+"@id": "https://api.chess.com/pub/player/okawashido",
+"username": "okawashido",
+"uuid": "0a445820-3a71-11f0-ac84-6df208b4ea6f"
+},
+"black": {
+"rating": 230,
+"result": "stalemate",
+"@id": "https://api.chess.com/pub/player/mdecombax",
+"username": "mdecombax",
+"uuid": "09ebaf8a-03be-11ef-a571-eba4146e6086"
+},
+"eco": "https://www.chess.com/openings/Indian-Game-Knights-Variation-2...e6-3.g3-d5"
+}
+]
+}
