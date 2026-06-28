@@ -31,20 +31,24 @@ python3 -m venv .venv
 # Stockfish requis : brew install stockfish
 ```
 
-## Utilisation
+## Page en ligne
+**https://mdecombax.github.io/coachV2/** (GitHub Pages, sert `web/`).
 
-**Pipeline déterministe (une commande) :**
-```bash
-./.venv/bin/python src/coach.py --depth 12 --n 20
+## Le run quotidien
+Ouvre ce repo dans **Claude Code** et dis **« run le run quotidien »**
+(ou tape **/run-quotidien**). Claude Code exécute tout en interactif :
+
 ```
+src/daily.py (fetch + analyse + sélection + faits, déterministe)
+  → Claude écrit la prose (briefing + continuité coup par coup + puzzles)
+  → met à jour data/coaching_state.json (mémoire du coaching)
+  → git push  → GitHub Pages se redéploie
+```
+Aucun appel API : la partie LLM est faite par Claude Code, en local.
 
-**Couche LLM (Claude Code) :** ouvrir Claude Code dans le projet et suivre
-`prompts/daily_coach.md` (remplit la prose des nouveaux blunders).
-
-**Page de révision :**
+**Test local de la page :**
 ```bash
-cd web && ../.venv/bin/python -m http.server 8777
-# puis http://localhost:8777
+cd web && ../.venv/bin/python -m http.server 8777   # http://localhost:8777
 ```
 - Flèche **rouge** = coup joué, **verte** = meilleur coup.
 - « Révéler » dévoile temps de réflexion, pourquoi c'est un blunder, meilleur
