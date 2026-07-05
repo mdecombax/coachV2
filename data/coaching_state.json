@@ -1,58 +1,80 @@
 {
-  "last_game_end": 1782620387,
-  "focus": [
-    {
-      "motif": "piece_pendue",
-      "label": "Ne pas pendre de pièces",
-      "ref_rate": 1.78,
-      "status": "actif (respecté aujourd'hui)"
-    },
-    {
-      "motif": "mat_permis",
-      "label": "Protéger ton roi (ne pas permettre de mat)",
-      "ref_rate": 0.7,
-      "status": "actif (respecté aujourd'hui)"
-    },
-    {
-      "motif": "mat_rate",
-      "label": "Finir les attaques (voir les mats)",
-      "ref_rate": 0.24,
-      "status": "actif — priorité du jour"
-    }
-  ],
-  "history": [
-    {
-      "date": "2026-06-28",
-      "games": [
-        "2aec37df-72a5-11f1-bbe2-859d0501000f"
-      ],
-      "result": "victoire",
-      "applied": [
-        "piece_pendue",
-        "mat_permis"
-      ],
-      "to_work": [
-        "mat_rate"
-      ],
-      "advice": "Chercher l'échec qui mate avant de jouer un coup d'attaque."
-    }
-  ],
-  "baseline": {
-    "n_games": 50,
-    "acpl": 79.41,
-    "errors_per_game": 5.32,
-    "gaffes_per_game": 2.8,
-    "impulsive_per_game": 1.34,
-    "zeitnot_per_game": 3.52,
-    "avg_think_s": 20.45,
-    "win_rate": 0.54,
-    "avg_rating": 424.54,
-    "motif_rates": {
-      "piece_pendue": 1.78,
-      "mat_rate": 0.24,
-      "mat_permis": 0.7,
-      "gain_manque": 0.2,
-      "erreur_positionnelle": 2.4
-    }
+ "last_game_end": 1783276269,
+ "focus": [
+  {
+   "motif": "piece_pendue",
+   "label": "Ne pas pendre de pièces",
+   "ref_rate": 1.68,
+   "status": "actif (rechute en zeitnot le 03/07 : 3 pièces pendues ; sinon 0 sur les 4 autres parties)"
+  },
+  {
+   "motif": "mat_permis",
+   "label": "Protéger ton roi (ne pas permettre de mat)",
+   "ref_rate": 0.68,
+   "status": "actif (2 mats permis en zeitnot le 03/07 ; 0 sur les 4 autres parties)"
+  },
+  {
+   "motif": "gain_manque",
+   "label": "Saisir les gains de matériel",
+   "ref_rate": 0.18,
+   "status": "en bonne voie (0 sur les 5 dernières parties)"
   }
+ ],
+ "history": [
+  {
+   "date": "2026-06-28",
+   "games": [
+    "2aec37df-72a5-11f1-bbe2-859d0501000f"
+   ],
+   "result": "victoire",
+   "applied": [
+    "piece_pendue",
+    "mat_permis"
+   ],
+   "to_work": [
+    "mat_rate"
+   ],
+   "advice": "Chercher l'échec qui mate avant de jouer un coup d'attaque."
+  },
+  {
+   "date": "2026-07-05",
+   "games": [
+    "364226a7-75a3-11f1-9d06-957be001000f",
+    "f81040b1-7672-11f1-9d06-957be001000f",
+    "a70ac310-772d-11f1-b375-f31baa01000f",
+    "52d67518-77dd-11f1-a09a-0bb14001000f",
+    "0f2df535-789b-11f1-93ed-401bd101000f"
+   ],
+   "result": "4 victoires, 1 défaite",
+   "applied": [
+    "gain_manque",
+    "piece_pendue (4/5 parties)",
+    "mat_permis (4/5 parties)"
+   ],
+   "to_work": [
+    "piece_pendue en zeitnot",
+    "mat_permis en zeitnot",
+    "coups impulsifs (<5 s) sous pression"
+   ],
+   "advice": "Sous 2 minutes à la pendule : avant chaque coup, vérifier « son dernier coup attaque quoi ? mon coup laisse quoi en prise ? »"
+  }
+ ],
+ "baseline": {
+  "n_games": 50,
+  "acpl": 71.93,
+  "errors_per_game": 5.04,
+  "gaffes_per_game": 2.62,
+  "impulsive_per_game": 1.34,
+  "zeitnot_per_game": 3.4,
+  "avg_think_s": 22.15,
+  "win_rate": 0.6,
+  "avg_rating": 434.54,
+  "motif_rates": {
+   "piece_pendue": 1.68,
+   "mat_rate": 0.16,
+   "mat_permis": 0.68,
+   "gain_manque": 0.18,
+   "erreur_positionnelle": 2.34
+  }
+ }
 }
